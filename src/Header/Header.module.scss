@@ -1,0 +1,19 @@
+.header {
+    background-color: rgb(51, 48, 48);
+    padding: 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.header__menu {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    list-style: none;
+    color: #fff;
+}
+.header__logo {
+    width: 70px;
+    height: 70px;
+}
