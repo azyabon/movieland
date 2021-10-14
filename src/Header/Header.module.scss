@@ -1,6 +1,6 @@
 .header {
     background-color: rgb(51, 48, 48);
-    padding: 20px;
+    padding: 15px;
 }
 .container {
     max-width: 1200px;
@@ -8,7 +8,9 @@
 }
 .header__menu {
     display: flex;
+    width: 25%;
     align-items: center;
+    justify-content: space-between;
     font-size: 22px;
     list-style: none;
     color: #fff;

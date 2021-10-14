@@ -1,0 +1,28 @@
+.container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+.form {
+    background-color: rgb(51, 48, 48);
+    padding: 20px;
+}
+.input {
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: rgb(80, 80, 80);
+    padding: 15px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 22px;
+    padding: 18px 42px;
+}
+.loupe {
+    position: absolute;
+    left: 7px;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+}
