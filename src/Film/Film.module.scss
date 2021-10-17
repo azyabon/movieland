@@ -1,13 +1,25 @@
 .film {
+    position: relative;
     margin: 10px;
     flex: 1 1 23%;
     cursor: pointer;
     :hover {
-        border: 2px solid #fff;
+        transform: scale(0.99);
+        .favourite {
+            display: block;
+        }
     }
 }
-
 .film__poster {
     width: 100%;
     height: 100%;
+    border-radius: 15px;
+}
+.favourite {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 35px;
+    height: 35px;
 }

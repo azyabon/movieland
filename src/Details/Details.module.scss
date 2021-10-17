@@ -20,6 +20,10 @@
     position: absolute;
     color: #fff;
 }
+.preview__info img {
+    max-width:  300px;
+    height: auto;
+}
 .poster__title {
     font-weight: 700;
     font-size: 50px;
@@ -27,4 +31,15 @@
 .poster__overview {
     margin: 20px 0 0 0;
     font-size: 20px;
+}
+.movie__info {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(51, 48, 48);
+    padding: 25px;
+    color: #fff;
+}
+.info__img {
+    width: 40px;
+    height: 40px;
 }
