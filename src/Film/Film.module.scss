@@ -5,9 +5,9 @@
     cursor: pointer;
     :hover {
         transform: scale(0.99);
-        .favourite {
-            display: block;
-        }
+        // .favourite {
+        //     display: block;
+        // }
     }
 }
 .film__poster {
@@ -15,11 +15,11 @@
     height: 100%;
     border-radius: 15px;
 }
-.favourite {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 35px;
-    height: 35px;
-}
+// .favourite {
+//     display: none;
+//     position: absolute;
+//     top: 10px;
+//     left: 10px;
+//     width: 35px;
+//     height: 35px;
+// }

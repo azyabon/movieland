@@ -18,6 +18,7 @@ const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?${API_KEY}&query=`
 
 export default function App() {
   const [movies, setMovies] = useState([]);
+  const [preview, setPreview] = useState({});
   const [id, setId] = useState("");
   // const [isTitle, setIsTitle] = useState(false);
   // const [title, setTitle] = useState("");
@@ -26,8 +27,8 @@ export default function App() {
     fetch(TOP_URL)
       .then(res => res.json())
       .then(data => {
-        console.log(data.results);
         setMovies(data.results);
+        setPreview(data.results[0]);
       })
   }, [])
 
@@ -58,32 +59,35 @@ export default function App() {
           <Switch>
             <Route exact path="/">
               <Preview 
-              {...movies[0]}
+              {...preview}
               />
               <Search 
               func={searchMovies}
               />
               <div className={styles.container}>
-              <h1 className={styles.title}>Popular Movies</h1>
-                <div className={styles.films}>
-                  {movies.map(movie => {
-                    return (
-                      <Film 
-                        key={movie.id}
-                        id={movie.id}
-                        title={movie.title}
-                        poster={movie.poster_path}
-                        func={changeId}
-                      />
-                    );
-                  })}
-                </div>
+                <h1 className={styles.title}>Popular Movies</h1>
+                  <div className={styles.films}>
+                    {movies.map(movie => {
+                      return (
+                        <Film 
+                          key={movie.id}
+                          id={movie.id}
+                          title={movie.title}
+                          poster={movie.poster_path}
+                          func={changeId}
+                        />
+                      );
+                    })}
+                  </div>
               </div>
             </Route>
             <Route path="/details">
               <Details
                 id={id}
               />
+            </Route>
+            <Route path="/favorites">
+              123
             </Route>
           </Switch>
         </div>

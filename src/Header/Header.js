@@ -18,7 +18,7 @@ const Header = () => {
                         <img className={styles.powered} src="./tmdb.png" alt="" />
                     </li>
                     <li><Link style={style} to="/">Home</Link></li>
-                    <li>Favorites</li>
+                    <li><Link style={style} to="/favorites">Favorites</Link></li>
                     <li>
                         <a  target="_blank" href="https://github.com/azyabon/reactmovie_app"><img className={styles.git} src="./github.png" alt="" /></a>
                     </li>

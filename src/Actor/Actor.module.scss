@@ -1,0 +1,16 @@
+.actor {
+    margin: 20px;
+    display: flex;
+    flex: 0 1 450px;
+    background-color: rgb(51, 48, 48);
+    border-radius: 15px 15px 15px 15px;
+    color: #fff;
+}
+.actor img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 15px 0 0 15px;
+}
+.actor__info {
+    margin: 20px;
+}
