@@ -15,31 +15,37 @@ const Details = (props) => {
         fetch(`https://api.themoviedb.org/3/movie/${props.id}?${API_KEY}&language=en-US`)
             .then(res => res.json())
             .then(data => {
-            setMovie(data);
+                console.log(data);
+                setMovie(data);
             });
         fetch(`https://api.themoviedb.org/3/movie/${props.id}/casts?${API_KEY}`)
-        .then(res => res.json())
-        .then(data => {
-        setActors(data.cast);
-        console.log(data.cast)
-        });
+            .then(res => res.json())
+            .then(data => {
+                setActors(data.cast);
+            });
         }, [])
+
+        const putMovies = () => {
+            let movies = props.local();
+            movies.push({title: movie.original_title, poster: movie.poster_path, id: movie.id});
+            localStorage.setItem("movies", JSON.stringify(movies));
+        }
 
     return(
         <div>
             <div className={styles.details}>
             <img className={styles.details__bgc} src={movie.backdrop_path ? IMG_URL + movie.backdrop_path : NO_IMG} alt={movie.original_title} />
             <div className={styles.favorite}>
-                <img className={styles.favourite__img} src="./favourite.png" alt="favourite" />
+                <img className={styles.favourite__img} src="./favourite.png" alt="favourite" onClick={putMovies} />
             </div>
                 <div className={styles.details__content}>
                     <img src={movie.poster_path ? IMG_URL + movie.poster_path : NO_IMG} alt="poster" />
                     <div className={styles.details__overview}>
                         <h1>{movie.original_title}</h1>
-                        <p>{movie.status}: {movie.release_date}</p>
-                        <p>Plot: {movie.overview}</p>
+                        <span>{movie.status}: {movie.release_date}</span>
+                        <p><h3>PLOT:</h3>{movie.overview}</p>
                         {/* <p>Genres: {movie.genres.map(e => e.name + " ")}</p> */}
-                        <p>IMDB Rating: {movie.vote_average}</p>
+                        <p><h3>IMDB Rating:</h3>{movie.vote_average}</p>
                     </div>
                 </div>
             </div>

@@ -20,8 +20,7 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [preview, setPreview] = useState({});
   const [id, setId] = useState("");
-  // const [isTitle, setIsTitle] = useState(false);
-  // const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     fetch(TOP_URL)
@@ -40,6 +39,7 @@ export default function App() {
         const RESPONSE = await fetch(SEARCH_URL + MOVIE);
         const DATA = await RESPONSE.json();
         setMovies(DATA.results);
+        setTitle(MOVIE);
       } catch(e) {
         alert(e);
       }
@@ -50,6 +50,14 @@ export default function App() {
 
   function changeId(id) {
     setId(id);
+  }
+
+  const getMovies = () => {
+    const moviesLocalStorage = localStorage.getItem("movies");
+    if (moviesLocalStorage !== null) {
+      return JSON.parse(moviesLocalStorage);
+    }
+    return [];
   }
 
     return (
@@ -65,8 +73,8 @@ export default function App() {
               func={searchMovies}
               />
               <div className={styles.container}>
-                <h1 className={styles.title}>Popular Movies</h1>
-                  <div className={styles.films}>
+                <h1 className={styles.title}>{title ? `Request: ${title}` : "Popular Movies"} </h1>
+                  <div className={styles.movies}>
                     {movies.map(movie => {
                       return (
                         <Film 
@@ -84,10 +92,26 @@ export default function App() {
             <Route path="/details">
               <Details
                 id={id}
+                local={getMovies}
               />
             </Route>
             <Route path="/favorites">
-              123
+            <div className={styles.container}>
+              <h2>Your library</h2>
+                <section className={styles.movies}>
+                {JSON.parse(localStorage.getItem("movies")) ? JSON.parse(localStorage.getItem("movies")).map(movie => {
+                  return (
+                  <Film
+                    key={movie.id}
+                    id={movie.id}
+                    title={movie.title}
+                    poster={movie.poster}
+                    func={changeId}
+                  />
+                  );
+                }) : ""}
+              </section>
+            </div>
             </Route>
           </Switch>
         </div>
