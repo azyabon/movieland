@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### `HOST`: u116164.test-handyhost.ru
+### `HOST`: http://u116164.test-handyhost.ru
 
 ## Available Scripts
 
