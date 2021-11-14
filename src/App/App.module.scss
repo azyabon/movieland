@@ -4,10 +4,39 @@
 }
 .movies {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 .title {
     margin: 25px 0 10px 0;
     font-weight: 500;
+}
+.load {
+    position: fixed;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.error {
+    font-size: 22px;
+    margin: 20px;
+    background-color: rgba(255, 97, 97, 0.4);
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    color: rgb(110, 0, 0);
+}
+h2 {
+    margin: 20px;
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sort {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-top: 15px;
 }

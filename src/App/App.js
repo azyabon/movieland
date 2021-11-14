@@ -8,9 +8,10 @@ import {
 import Header from '../Header/Header';
 import Film from '../Film/Film';
 import Preview from '../Preview/Preview';
-import Search from '../Input/Search';
+import Search from '../Search/Search';
 import Details from '../Details/Details';
 import styles from './App.module.scss';
+import Library from '../Library/Library';
 
 const API_KEY = "api_key=36d3b9492c7c489a5890ffdecffba2e5";
 const TOP_URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&${API_KEY}`;
@@ -21,6 +22,7 @@ export default function App() {
   const [preview, setPreview] = useState({});
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     fetch(TOP_URL)
@@ -32,6 +34,7 @@ export default function App() {
   }, [])
 
   async function searchMovies(e) {
+    setLoad(true);
     e.preventDefault();
     const MOVIE = e.target[0].value;
     if (MOVIE) {
@@ -39,13 +42,15 @@ export default function App() {
         const RESPONSE = await fetch(SEARCH_URL + MOVIE);
         const DATA = await RESPONSE.json();
         setMovies(DATA.results);
+        console.log(DATA.results)
         setTitle(MOVIE);
       } catch(e) {
         alert(e);
       }
     } else {
-      alert("Вы ничего не ввели!")
+      alert("Enter the title of the movie!")
     }
+    setLoad(false);
   }
 
   function changeId(id) {
@@ -63,6 +68,7 @@ export default function App() {
     return (
       <Router>
         <div className={styles.wrapper}>
+        {load ? <img className={styles.load} src="./spin.gif" alt="load" /> : ""}
           <Header />
           <Switch>
             <Route exact path="/">
@@ -73,9 +79,12 @@ export default function App() {
               func={searchMovies}
               />
               <div className={styles.container}>
-                <h1 className={styles.title}>{title ? `Request: ${title}` : "Popular Movies"} </h1>
+                <div className={styles.head}>
+                  <h1 className={styles.title}>{title ? `Request: ${title}` : "Popular Movies"} </h1>
+                  <img src="./filter.png" alt="sort" className={styles.sort} />
+                </div>
                   <div className={styles.movies}>
-                    {movies.map(movie => {
+                    {movies.length === 0 ? <span className={styles.error}>No such movie found</span> : movies.map(movie => {
                       return (
                         <Film 
                           key={movie.id}
@@ -95,22 +104,13 @@ export default function App() {
                 local={getMovies}
               />
             </Route>
-            <Route path="/favorites">
+            <Route path="/library">
             <div className={styles.container}>
               <h2>Your library</h2>
-                <section className={styles.movies}>
-                {JSON.parse(localStorage.getItem("movies")) ? JSON.parse(localStorage.getItem("movies")).map(movie => {
-                  return (
-                  <Film
-                    key={movie.id}
-                    id={movie.id}
-                    title={movie.title}
-                    poster={movie.poster}
-                    func={changeId}
-                  />
-                  );
-                }) : ""}
-              </section>
+              <Library
+                movies={movies}
+                func={changeId}
+              />
             </div>
             </Route>
           </Switch>
