@@ -4,6 +4,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import Header from '../Header/Header';
 import Film from '../Film/Film';
@@ -12,14 +13,15 @@ import Search from '../Search/Search';
 import Details from '../Details/Details';
 import styles from './App.module.scss';
 import Library from '../Library/Library';
+import movies from '../store/movies';
+import preview from '../store/preview';
 
 const API_KEY = "api_key=36d3b9492c7c489a5890ffdecffba2e5";
 const TOP_URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&${API_KEY}`;
 const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?${API_KEY}&query=`;
 
-export default function App() {
-  const [movies, setMovies] = useState([]);
-  const [preview, setPreview] = useState({});
+const App = observer(() => {
+
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState(false);
@@ -28,8 +30,8 @@ export default function App() {
     fetch(TOP_URL)
       .then(res => res.json())
       .then(data => {
-        setMovies(data.results);
-        setPreview(data.results[0]);
+        movies.savePopularMovies(data.results);
+        preview.savePreview(data.results[0]);
       })
   }, [])
 
@@ -41,8 +43,7 @@ export default function App() {
       try {
         const RESPONSE = await fetch(SEARCH_URL + MOVIE);
         const DATA = await RESPONSE.json();
-        setMovies(DATA.results);
-        console.log(DATA.results)
+        movies.savePopularMovies(DATA.results);
         setTitle(MOVIE);
       } catch(e) {
         alert(e);
@@ -73,7 +74,7 @@ export default function App() {
           <Switch>
             <Route exact path="/">
               <Preview 
-              {...preview}
+              {...preview.preview}
               />
               <Search 
               func={searchMovies}
@@ -84,7 +85,7 @@ export default function App() {
                   <img src="./filter.png" alt="sort" className={styles.sort} />
                 </div>
                   <div className={styles.movies}>
-                    {movies.length === 0 ? <span className={styles.error}>No such movie found</span> : movies.map(movie => {
+                    {movies.movies.length === 0 ? <span className={styles.error}>No such movie found</span> : movies.movies.map(movie => {
                       return (
                         <Film 
                           key={movie.id}
@@ -108,7 +109,6 @@ export default function App() {
             <div className={styles.container}>
               <h2>Your library</h2>
               <Library
-                movies={movies}
                 func={changeId}
               />
             </div>
@@ -117,4 +117,6 @@ export default function App() {
         </div>
       </Router>
     );
-}
+});
+
+export default App;
