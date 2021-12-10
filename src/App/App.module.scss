@@ -5,6 +5,7 @@
 .movies {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .title {
     margin: 25px 0 10px 0;
@@ -39,4 +40,12 @@ h2 {
     height: 40px;
     cursor: pointer;
     margin-top: 15px;
+}
+.footer {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+    justify-content: center;
+    background-color: rgb(51, 48, 48);
+    color: #fff;
 }

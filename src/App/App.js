@@ -14,25 +14,16 @@ import Details from '../Details/Details';
 import styles from './App.module.scss';
 import Library from '../Library/Library';
 import movies from '../store/movies';
-import preview from '../store/preview';
 
 const API_KEY = "api_key=36d3b9492c7c489a5890ffdecffba2e5";
-const TOP_URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&${API_KEY}`;
 const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?${API_KEY}&query=`;
 
 const App = observer(() => {
 
-  const [id, setId] = useState("");
-  const [title, setTitle] = useState("");
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    fetch(TOP_URL)
-      .then(res => res.json())
-      .then(data => {
-        movies.savePopularMovies(data.results);
-        preview.savePreview(data.results[0]);
-      })
+      movies.getPopularMovies();
   }, [])
 
   async function searchMovies(e) {
@@ -43,19 +34,18 @@ const App = observer(() => {
       try {
         const RESPONSE = await fetch(SEARCH_URL + MOVIE);
         const DATA = await RESPONSE.json();
-        movies.savePopularMovies(DATA.results);
-        setTitle(MOVIE);
+        movies.saveMovies(DATA.results, MOVIE);
       } catch(e) {
         alert(e);
       }
     } else {
-      alert("Enter the title of the movie!")
+      alert("Enter the title of the movie!");
     }
     setLoad(false);
   }
 
-  function changeId(id) {
-    setId(id);
+  function saveID(id) {
+    localStorage.setItem("RMovieID", id);
   }
 
   const getMovies = () => {
@@ -74,14 +64,14 @@ const App = observer(() => {
           <Switch>
             <Route exact path="/">
               <Preview 
-              {...preview.preview}
+              {...movies.preview}
               />
               <Search 
               func={searchMovies}
               />
               <div className={styles.container}>
                 <div className={styles.head}>
-                  <h1 className={styles.title}>{title ? `Request: ${title}` : "Popular Movies"} </h1>
+                  <h1 className={styles.title}>{movies.title} </h1>
                   <img src="./filter.png" alt="sort" className={styles.sort} />
                 </div>
                   <div className={styles.movies}>
@@ -92,7 +82,7 @@ const App = observer(() => {
                           id={movie.id}
                           title={movie.title}
                           poster={movie.poster_path}
-                          func={changeId}
+                          func={saveID}
                         />
                       );
                     })}
@@ -101,7 +91,6 @@ const App = observer(() => {
             </Route>
             <Route path="/details">
               <Details
-                id={id}
                 local={getMovies}
               />
             </Route>
@@ -109,11 +98,12 @@ const App = observer(() => {
             <div className={styles.container}>
               <h2>Your library</h2>
               <Library
-                func={changeId}
+                func={saveID}
               />
             </div>
             </Route>
           </Switch>
+          <footer><a className={styles.footer} href="https://www.themoviedb.org/?language=ru" target="_blank" rel="noreferrer">Powered by TheMovieDB</a></footer>
         </div>
       </Router>
     );

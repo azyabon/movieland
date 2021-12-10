@@ -28,3 +28,13 @@
     margin: 20px 0 0 0;
     font-size: 20px;
 }
+
+
+@media screen and (max-width: 800px) {
+    .poster__title {
+        font-size: 30px;
+    }
+    .poster__overview {
+        font-size: 16px;
+    }
+}

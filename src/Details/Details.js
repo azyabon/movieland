@@ -1,27 +1,25 @@
 import React, {useState, useEffect} from 'react';
+import { observer } from 'mobx-react-lite';
 
 import styles from './Details.module.scss';
 import Actor from '../Actor/Actor';
+import actors from '../store/actors';
 
 const IMG_URL = `https://image.tmdb.org/t/p/original`;
 const NO_IMG = "https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg";
 const API_KEY = "api_key=36d3b9492c7c489a5890ffdecffba2e5";
 
-const Details = (props) => {
+const Details = observer((props) => {
+
     const [movie, setMovie] = useState({});
-    const [actors, setActors] = useState([]);
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${props.id}?${API_KEY}&language=en-US`)
+        window.scrollTo(0, 0);
+        actors.getActors();
+        fetch(`https://api.themoviedb.org/3/movie/${localStorage.getItem("RMovieID")}?${API_KEY}&language=en-US`)
             .then(res => res.json())
             .then(data => {
                 setMovie(data);
-                console.log(data)
-            });
-        fetch(`https://api.themoviedb.org/3/movie/${props.id}/casts?${API_KEY}`)
-            .then(res => res.json())
-            .then(data => {
-                setActors(data.cast);
             });
         }, [])
 
@@ -65,12 +63,12 @@ const Details = (props) => {
                 <span><img className={styles.info__img} src="./tickets.png" alt="tickets" />Revenue: ${movie.revenue === 0 ? "unknown" : movie.revenue}</span>
             </div>
             <section className={styles.actors}>
-                {actors.map(actor => {
+                {actors.actors.map(actor => {
                     return <Actor key={actor.id} {...actor} />
                 })}
             </section>
         </div>
     );
-}
+})
 
 export default Details;
