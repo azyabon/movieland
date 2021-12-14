@@ -23,7 +23,7 @@ const App = observer(() => {
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-      movies.getPopularMovies();
+    movies.getPopularMovies();
   }, [])
 
   async function searchMovies(e) {

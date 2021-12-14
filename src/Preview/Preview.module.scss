@@ -1,16 +1,18 @@
 .preview {
-    position: relative;
+    //position: relative;
     display: flex;
     height: 730px;
     background-color: rgb(80, 80, 80);
+    user-select: none;
+    min-width: 100%;
+    max-width: 100%;
 }
 .preview__bgc {
     width: 100%;
-    height: auto;
     object-fit: cover;
 }
 .preview__info {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.4);
     padding: 15px;
     border-radius: 10px;
     max-width: 700px;
@@ -27,6 +29,34 @@
 .poster__overview {
     margin: 20px 0 0 0;
     font-size: 20px;
+}
+.window {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.previews {
+    display: flex;
+    //translate
+}
+.prev {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    cursor: pointer;
+    font-size: 25px;
+    color: #fff;
+    font-weight: 700;
+}
+.next {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    cursor: pointer;
+    font-size: 25px;
+    color: #fff;
+    font-weight: 700;
 }
 
 
