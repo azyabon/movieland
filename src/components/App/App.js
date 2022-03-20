@@ -13,7 +13,7 @@ import Search from '../Search/Search';
 import Details from '../Details/Details';
 import styles from './App.module.scss';
 import Library from '../Library/Library';
-import movies from '../store/movies';
+import movies from '../../store/movies';
 
 
 const App = observer(() => {

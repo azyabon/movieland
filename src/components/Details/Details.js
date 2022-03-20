@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 
 import styles from './Details.module.scss';
 import Actor from '../Actor/Actor';
-import actors from '../store/actors';
-import movies from "../store/movies";
+import actors from '../../store/actors';
+import movies from "../../store/movies";
 import YouTube from "react-youtube";
 
 const IMG_URL = `https://image.tmdb.org/t/p/original`;
@@ -12,7 +12,7 @@ const NO_IMG = "https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg";
 const API_KEY = "api_key=36d3b9492c7c489a5890ffdecffba2e5";
 
 const Details = observer((props) => {
-    const [trailer, setTrailer] = useState("");
+    const [trailer, setTrailer] = useState(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -24,7 +24,10 @@ const Details = observer((props) => {
     const getTrailer = async () => {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${localStorage.getItem("RMovieID")}/videos?${API_KEY}&language=en-US`)
         const data = await response.json();
-        setTrailer(data.results[1].key);
+        console.log(data)
+        if (data.results.length != 0) {
+            setTrailer(data.results[0].key);
+        }
     }
 
     const putMovies = () => {

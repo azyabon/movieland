@@ -4,7 +4,7 @@ import {
     Link
 } from 'react-router-dom';
 
-import movies from '../store/movies';
+import movies from '../../store/movies';
 
 const Header = () => {
     const style = {

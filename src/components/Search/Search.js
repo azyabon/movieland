@@ -1,5 +1,5 @@
 import styles from './Search.module.scss';
-import movies from '../store/movies';
+import movies from '../../store/movies';
 
 const Search = (props) => {
     return(
