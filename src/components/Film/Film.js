@@ -13,6 +13,7 @@ const Film = (props) => {
             <Link to="/details">
                 <img className={styles.movie__poster} src={props.poster  ? IMG_URL + props.poster : NO_IMG} alt={props.title} />
             </Link>
+            {props.delete ? <button className={styles.delete} onClick={() => props.delete(props.id)}>Delete</button> : ""}
         </div>
     );
 }

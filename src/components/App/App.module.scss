@@ -41,7 +41,15 @@ h2 {
     cursor: pointer;
     margin-top: 15px;
 }
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+    padding: 0 0 50px 0;
+}
 .footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
     display: flex;
     width: 100%;
     padding: 15px;
