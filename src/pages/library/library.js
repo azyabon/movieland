@@ -1,9 +1,10 @@
 import React from 'react'
 import { useEffect, useState} from 'react';
-import Film from '../Film/Film';
-import styles from './Library.module.scss';
+import Film from '../../components/Film/Film';
+import styles from './library.module.scss';
+import Header from "../../components/Header/Header";
 
-export default function Library(props) {
+const Library = () => {
     const [AllSavedMovies, setAllSavedMovies] = useState(JSON.parse(localStorage.getItem("movies")));
 
     useEffect(() => {
@@ -16,8 +17,13 @@ export default function Library(props) {
         localStorage.setItem("movies", JSON.stringify(arr));
     }
 
+    function saveID(id) {
+        localStorage.setItem("RMovieID", id);
+    }
+
     return (
-        <section className={styles.library}>
+        <>
+            <section className={styles.library}>
                 {AllSavedMovies ? AllSavedMovies.map(movie => {
                     return (
                         <Film
@@ -25,12 +31,14 @@ export default function Library(props) {
                             id={movie.id}
                             title={movie.title}
                             poster={movie.poster}
-                            func={props.func}
+                            func={saveID}
                             delete={deleteMovieFromLibrary}
                         />
                     );
-                    }) : ""}
-                </section>
+                }) : ""}
+            </section>
+        </>
     )
-}
+};
 
+export default Library;

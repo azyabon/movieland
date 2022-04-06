@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { observer } from 'mobx-react-lite';
 
-import styles from './Details.module.scss';
-import Actor from '../Actor/Actor';
+import styles from './details.module.scss';
+import Actor from '../../components/Actor/Actor';
 import actors from '../../store/actors';
-import movies from "../../store/movies";
+import movies from '../../store/movies';
 import YouTube from "react-youtube";
 
 const IMG_URL = `https://image.tmdb.org/t/p/original`;
@@ -19,19 +19,26 @@ const Details = observer((props) => {
         actors.getActors();
         movies.getInfoAboutCurrentMovie();
         getTrailer();
-        }, [])
+    }, [])
 
     const getTrailer = async () => {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${localStorage.getItem("RMovieID")}/videos?${API_KEY}&language=en-US`)
         const data = await response.json();
-        console.log(data)
-        if (data.results.length != 0) {
+        if (data.results.length !== 0) {
             setTrailer(data.results[0].key);
         }
     }
 
+    const getMoviesFromLC = () => {
+        const moviesLocalStorage = localStorage.getItem("movies");
+        if (moviesLocalStorage !== null) {
+            return JSON.parse(moviesLocalStorage);
+        }
+        return [];
+    }
+
     const putMovies = () => {
-        let LS_movies = props.local();
+        let LS_movies = getMoviesFromLC();
         LS_movies = LS_movies.filter((elem) => {
             if (elem.id === movies.currentMovie.id) {
                 return false
@@ -47,10 +54,10 @@ const Details = observer((props) => {
         <div>
             {movies.isFetching ? <img className={styles.load} src="./spin.gif" alt="load" /> : null}
             <div className={styles.details}>
-            <img className={styles.details__bgc} src={movies.currentMovie.backdrop_path ? IMG_URL + movies.currentMovie.backdrop_path : NO_IMG} alt={movies.currentMovie.original_title} />
-            <div className={styles.favorite}>
-                <img className={styles.favourite__img} src="./favourite.png" alt="favourite" onClick={putMovies} />
-            </div>
+                <img className={styles.details__bgc} src={movies.currentMovie.backdrop_path ? IMG_URL + movies.currentMovie.backdrop_path : NO_IMG} alt={movies.currentMovie.original_title} />
+                <div className={styles.favorite}>
+                    <img className={styles.favourite__img} src="./favourite.png" alt="favourite" onClick={putMovies} />
+                </div>
                 <div className={styles.details__content}>
                     <img src={movies.currentMovie.poster_path ? IMG_URL + movies.currentMovie.poster_path : NO_IMG} alt="poster" />
                     <div className={styles.details__overview}>
