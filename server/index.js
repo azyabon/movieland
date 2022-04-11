@@ -14,7 +14,7 @@ const start = async () => {
         await mongoose.connect(`mongodb+srv://azyabon:andrey110102@cluster0.pfsi2.mongodb.net/reactmovie?retryWrites=true&w=majority`)
         app.listen(PORT, () => console.log(`Server start on port ${PORT}`));
     } catch (e) {
-        console.log(e)
+        console.log(e) 
     }
 }
 
