@@ -1,4 +1,6 @@
-#does not work for russia
+# Doesn't work for russia, only with VPN
+
+# If have a problem with node-sass use "npm rebuild node-sass"
 
 # Getting Started with Create React App
 
