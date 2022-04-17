@@ -31,6 +31,27 @@
     width: 35px;
     height: 35px;
 }
+.menu_btn {
+    position: relative;
+ }
+.menu_btn__line,
+.menu_btn__line::before,
+.menu_btn__line::after {
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    transition: 0.5s;
+}
+.menu_btn__line::after,  {
+    content: '';
+    top: -7px;
+}
+.menu_btn__line::before {
+    content: '';
+    top: 7px;
+}
+
 
 @media screen and (max-width: 800px) {
     .header__logo {

@@ -1,0 +1,43 @@
+.circle {
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px dashed #fff;
+  z-index: 10;
+}
+.entering {
+  animation: show-loader 0.5s forwards;
+}
+.entered {
+  animation: rotate-loader 1s infinite;
+}
+.exiting {
+  animation: show-loader 0.5s reverse;
+}
+.exited {
+}
+
+@keyframes show-loader {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes rotate-loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

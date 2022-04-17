@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { observer } from 'mobx-react-lite';
 
 import Film from '../../components/Film/Film';
@@ -6,6 +6,7 @@ import Preview from '../../components/Preview/Preview';
 import Search from '../../components/Search/Search';
 import styles from './home.module.scss';
 import movies from '../../store/movies';
+import Loader from "../../components/Loader/Loader";
 
 
 const Home = observer(() => {
@@ -20,11 +21,9 @@ const Home = observer(() => {
 
     return (
             <div className={styles.wrapper}>
-                {movies.isFetching ? <img className={styles.load} src="./spin.gif" alt="load" /> : null}
-                <Preview
-                    {...movies.preview}
-                />
+                <Preview {...movies.preview} />
                 <Search />
+                <Loader />
                 <div className={styles.container}>
                     <div className={styles.head}>
                         <h1 className={styles.title}>{movies.title} </h1>

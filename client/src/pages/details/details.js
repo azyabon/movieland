@@ -6,6 +6,8 @@ import Actor from '../../components/Actor/Actor';
 import actors from '../../store/actors';
 import movies from '../../store/movies';
 import YouTube from "react-youtube";
+import Modal from "../../components/Modal/Modal";
+import Loader from "../../components/Loader/Loader";
 
 const IMG_URL = `https://image.tmdb.org/t/p/original`;
 const NO_IMG = "https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg";
@@ -13,6 +15,7 @@ const API_KEY = "api_key=36d3b9492c7c489a5890ffdecffba2e5";
 
 const Details = observer((props) => {
     const [trailer, setTrailer] = useState(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -47,12 +50,16 @@ const Details = observer((props) => {
         })
         LS_movies.push({title: movies.currentMovie.original_title, poster: movies.currentMovie.poster_path, id: movies.currentMovie.id});
         localStorage.setItem("movies", JSON.stringify(LS_movies));
-        alert(`${movies.currentMovie.original_title} has been added to your library`)
+        setOpen(true);
+        setTimeout(() => setOpen(false), 3000)
     }
 
     return(
-        <div>
-            {movies.isFetching ? <img className={styles.load} src="./spin.gif" alt="load" /> : null}
+        <>
+            <Loader />
+            <Modal open={open}>
+                <p><i>{movies.currentMovie.original_title}</i> has been added in your library</p>
+            </Modal>
             <div className={styles.details}>
                 <img className={styles.details__bgc} src={movies.currentMovie.backdrop_path ? IMG_URL + movies.currentMovie.backdrop_path : NO_IMG} alt={movies.currentMovie.original_title} />
                 <div className={styles.favorite}>
@@ -85,7 +92,7 @@ const Details = observer((props) => {
                     return <Actor key={actor.id} {...actor} />
                 })}
             </section>
-        </div>
+        </>
     );
 })
 

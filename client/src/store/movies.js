@@ -9,7 +9,7 @@ class Movies {
     preview = {};
     currentMovie = {};
     title = "";
-    isFetching = false;
+    isLoad = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -19,44 +19,47 @@ class Movies {
         e.preventDefault()
         const MOVIE = e.target[0].value;
         if (MOVIE) {
+            this.isLoad = true;
             try {
-                this.isFetching = true
                 fetch(SEARCH_URL + MOVIE)
                     .then(res => res.json())
                     .then(data =>{
                         this.movies = data.results
-                        this.isFetching = false
+                        this.isLoad = false;
                     })
             } catch(error) {
                 alert(error);
             }
+            this.title = `Request: ${MOVIE}`;
         } else {
             alert("Enter the title of the movie!");
         }
-        this.title = `Request: ${MOVIE}`;
     }
 
     getInfoAboutCurrentMovie() {
         try {
-            this.isFetching = true
+            this.isLoad = true;
             fetch(`https://api.themoviedb.org/3/movie/${localStorage.getItem("RMovieID")}?${API_KEY}&language=en-US`)
                 .then(res => res.json())
                 .then(data => {
                     this.currentMovie = data
-                    this.isFetching = false
+                    this.isLoad = false;
                 });
         } catch (error) {
             alert(error)
+            this.isLoad = false;
         }
     }
 
     getPopularMovies() {
+        this.isLoad = true;
         fetch(TOP_URL)
             .then(res => res.json())
             .then(data => {
             this.movies = data.results;
             this.preview = data.results[0];
             this.title = "Popular Movies";
+                this.isLoad = false;
         })
     }
 }

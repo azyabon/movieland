@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect, useState} from 'react';
 import Film from '../../components/Film/Film';
 import styles from './library.module.scss';
-import Header from "../../components/Header/Header";
 
 const Library = () => {
     const [AllSavedMovies, setAllSavedMovies] = useState(JSON.parse(localStorage.getItem("movies")));

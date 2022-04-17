@@ -1,0 +1,16 @@
+.modal_card {
+    position: fixed;
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid rgb(51, 48, 48);
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    max-width: 500px;
+    top:10%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+.card_title {
+    text-align: center;
+}
