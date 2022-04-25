@@ -7,6 +7,7 @@ import Search from '../../components/Search/Search';
 import styles from './home.module.scss';
 import movies from '../../store/movies';
 import Loader from "../../components/Loader/Loader";
+import Modal from '../../components/Modal/Modal';
 
 
 const Home = observer(() => {
@@ -22,6 +23,9 @@ const Home = observer(() => {
     return (
             <div className={styles.wrapper}>
                 <Preview {...movies.preview} />
+                <Modal open={movies.open}>
+                <p>Enter the title of the movie!</p>
+                </Modal>
                 <Search />
                 <Loader />
                 <div className={styles.container}>

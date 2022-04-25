@@ -5,6 +5,7 @@ import Details from "../pages/details/details";
 import Library from "../pages/library/library";
 import Profile from "../pages/profile/profile";
 import Login from "../pages/login/login";
+import Notfound from '../pages/notfound/notfound';
 
 import Layout from "../layout/Layout";
 
@@ -17,6 +18,7 @@ const Router = () => {
                     <Route path="/details" element={<Details />}/>
                     <Route path="/library" element={<Library />}/>
                     <Route path="/profile" element={<Profile />}/>
+                    <Route path="*" element={<Notfound />}/>
                     <Route path="/login" element={<Login />}/>
                 </Route>
             </Routes>

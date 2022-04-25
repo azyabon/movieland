@@ -10,6 +10,7 @@ class Movies {
     currentMovie = {};
     title = "";
     isLoad = false;
+    open = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -32,7 +33,8 @@ class Movies {
             }
             this.title = `Request: ${MOVIE}`;
         } else {
-            alert("Enter the title of the movie!");
+            this.open = true;
+            setTimeout(() => this.open = false, 3000);
         }
     }
 
