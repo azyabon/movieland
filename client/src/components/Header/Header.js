@@ -20,11 +20,12 @@ const Header = () => {
                     <li onClick={() => movies.getPopularMovies()}><Link style={style} to="/">Home</Link></li>
                     <li><Link style={style} to="/library">Library</Link></li>
                     <li><Link style={style} to="/profile">Profile</Link></li>
-                    <div className={styles.menu_btn}>
-                        <span className={styles.menu_btn__line}></span>
-                    </div>
-                    <li>
-                        <a  target="_blank" rel="noreferrer" href="https://github.com/azyabon/reactmovie_app"><img className={styles.git} src="./github.png" alt="" /></a>
+                    {/*<div className={styles.menu_btn}>*/}
+                    {/*    <span className={styles.menu_btn__line}></span>*/}
+                    {/*</div>*/}
+                    <li className={styles.header__submenu}>
+                        <li><Link style={style} to="/login">Sign In</Link></li>
+                        <li><Link style={style} to="/registration">Sign Up</Link></li>
                     </li>
                 </ul>
             </div>

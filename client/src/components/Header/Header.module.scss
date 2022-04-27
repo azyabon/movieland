@@ -20,16 +20,15 @@
     margin-right: 0;
     margin-left: auto;
 }
+.header__submenu {
+    display: flex;
+}
 .header__logo {
     width: 70px;
     height: 70px;
 }
 .powered {
     width: 150px;
-}
-.git {
-    width: 35px;
-    height: 35px;
 }
 .menu_btn {
     position: relative;

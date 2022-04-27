@@ -14,13 +14,14 @@
 }
 
 .delete {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    background-color: red;
-    outline: none;
-    border: none;
+    cursor: pointer;
+    background-color: rgb(51, 48, 48);
     color: white;
-    font-size: 14px;
-    cursor: no-drop;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    &:hover {
+        background-color: red;
+    }
 }

@@ -5,6 +5,12 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const {secret} = require('./config');
 
+let today = new Date();
+const dd = String(today.getDate()).padStart(2, '0');
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const yyyy = today.getFullYear();
+today = mm + '/' + dd + '/' + yyyy;
+
 const generateAccesToken = (id, roles) => {
     const payload = {
         id,
@@ -21,14 +27,14 @@ class authController {
             if (!errors.isEmpty()) {
                 return res.status(400).json({message: "Ошибка при регистрации", errors})
             }
-            const {username, password} = req.body
+            const {username, password, email} = req.body
             const candidate = await User.findOne({username})
             if (candidate) {
                 return res.status(400).json({message: 'Пользователь с таким именем уже существует'})
             }
             const hashPassword = bcrypt.hashSync(password, 7);
             const userRole = await Role.findOne({value: "USER"})
-            const user = new User({username, password: hashPassword, roles: [userRole.value]})
+            const user = new User({username, password: hashPassword, date: today, email, roles: [userRole.value]})
             await user.save()
             return res.json({message: 'Пользователь успешно зарегистрирован'})
         }catch (e) {

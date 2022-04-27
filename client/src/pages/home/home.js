@@ -24,7 +24,7 @@ const Home = observer(() => {
             <div className={styles.wrapper}>
                 <Preview {...movies.preview} />
                 <Modal open={movies.open}>
-                <p>Enter the title of the movie!</p>
+                    <p>Enter the title of the movie!</p>
                 </Modal>
                 <Search />
                 <Loader />
