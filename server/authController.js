@@ -28,8 +28,9 @@ class authController {
                 return res.status(400).json({message: "Ошибка при регистрации", errors})
             }
             const {username, password, email} = req.body
-            const candidate = await User.findOne({username})
-            if (candidate) {
+            const candidate_name = await User.findOne({username})
+            const candidate_email = await User.findOne({email})
+            if (candidate_name || candidate_email) {
                 return res.status(400).json({message: 'Пользователь с таким именем уже существует'})
             }
             const hashPassword = bcrypt.hashSync(password, 7);
@@ -61,6 +62,18 @@ class authController {
             console.log(e);
             res.status(400).json({message: 'Login error'})
         }
+    }
+
+    async logout(req, res) {
+        return
+    }
+
+    async getInfoAboutUser(req, res) {
+        return
+    }
+
+    async putMovieInUser(req, res) {
+        return
     }
 
     async getUsers(req, res) {

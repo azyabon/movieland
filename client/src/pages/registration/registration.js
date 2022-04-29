@@ -15,6 +15,7 @@ const Registration = () => {
     const [emailError, setEmailError] = useState("Емэил не может быть пустым");
     const [formValid, setFormValid] = useState(false);
     const [modal, setModal] = useState(false);
+    const [registrError, setRegistrError] = useState("")
 
     useEffect(() => {
         if (emailError || passwordError || usernameError) {
@@ -31,8 +32,8 @@ const Registration = () => {
             password: e.target.elements[1].value,
             email: e.target.elements[2].value,
         }).then(data => console.log(data))
-            .catch(e => {
-                console.error(e.message);
+            .catch(error => {
+                console.log(error.toJSON());
                 setModal(true);
                 setTimeout(() => {
                     setModal(false);
@@ -92,7 +93,7 @@ const Registration = () => {
         <>
             <form className={styles.form} onSubmit={(e) => SignUp(e)}>
                 <Modal open={modal}>
-                    <p>Такой пользователь уже существует</p>
+                    <p>Ошибка регистрации</p>
                 </Modal>
                 <h3 className={styles.form__title}>Sign Up</h3>
                 <div className={styles.form__row}>
