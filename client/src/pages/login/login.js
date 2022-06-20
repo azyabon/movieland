@@ -5,7 +5,7 @@ const Login = () => {
 
     const SignIn = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:5000/auth/login", {
+        axios.post("http://localhost:5000/api/login", {
             username: e.target.elements[0].value,
             password: e.target.elements[1].value
         }).then(data => console.log(data)).catch(e => console.error(e))

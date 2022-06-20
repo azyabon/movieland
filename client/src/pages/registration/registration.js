@@ -27,7 +27,7 @@ const Registration = () => {
 
     const SignUp = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:5000/auth/registration", {
+        axios.post("http://localhost:5000/api/registration", {
             username: e.target.elements[0].value,
             password: e.target.elements[1].value,
             email: e.target.elements[2].value,
