@@ -1,19 +1,20 @@
 .actor {
-    margin: 20px;
+    margin-bottom: 1.25rem;
     display: flex;
-    flex: 0 1 450px;
+    flex: 0 1 29rem;
     background-color: rgb(51, 48, 48);
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 1rem 1rem 1rem 1rem;
     color: #fff;
 }
 .actor img {
-    max-width: 200px;
-    height: auto;
-    border-radius: 15px 0 0 15px;
+    height: auto !important;
+    border-radius: 1rem 0 0 1rem;
 }
 .actor__info {
-    margin: 20px;
+    margin: 1rem;
 }
 h2 {
-    font-size: 20px;
+    font-size: 1.3rem;
+    padding: 0;
+    margin:0 0 1rem 0;
 }
